@@ -11,6 +11,7 @@ const App = () => {
             <Button type="good" handler={() => setStatistics({...statistics, good: statistics.good + 1, total: statistics.total + 1})} />
             <Button type="neutral" handler={() => setStatistics({...statistics, neutral: statistics.neutral + 1, total: statistics.total + 1})} />
             <Button type="bad" handler={() => setStatistics({...statistics, bad: statistics.bad + 1, total: statistics.total + 1})} />
+            <h1>Statistics</h1>
             <Statistics stats={statistics} />
         </div>
     );
@@ -29,17 +30,20 @@ const Statistics = ({ stats }) => {
         return (stats.good / stats.total) * 100;
     }
     
-    return (
-        <div>
-            <h1>Statistics</h1>
-            <p>good {stats.good}</p>
-            <p>neutral {stats.neutral}</p>
-            <p>bad {stats.bad}</p>
-            <p>all {stats.total}</p>
-            <p>average {average()}</p>
-            <p>positive {positive()}%</p>
-        </div>
-    );
+    if (stats.total > 0) {
+        return (
+            <>
+                <p>good {stats.good}</p>
+                <p>neutral {stats.neutral}</p>
+                <p>bad {stats.bad}</p>
+                <p>all {stats.total}</p>
+                <p>average {average()}</p>
+                <p>positive {positive()}%</p>
+            </>
+        );
+    } else {
+        return <p>No feedback given!</p>;
+    }
 };
 
 export default App;
