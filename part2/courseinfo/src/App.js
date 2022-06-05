@@ -21,16 +21,12 @@ const Content = ({ parts }) => {
 }
 
 const Total = ({ parts }) => {
-    const calculate = () => {
-        let sum = 0;
-        parts.forEach((part) => {
-            sum += part.exercises;
-        });
-        return sum;
-    };
+    const total = parts.reduce((sum, part) => {
+        return sum + part.exercises
+    }, 0);
     
     return (
-        <p>Total of {calculate()} exercises</p>
+        <p>Total of {total} exercises</p>
     );
 }
 
